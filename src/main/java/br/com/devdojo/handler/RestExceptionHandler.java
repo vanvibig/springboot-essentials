@@ -94,7 +94,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .Builder
                 .newBuilder()
                 .timestamp(new Date().getTime())
-                .status(HttpStatus.NOT_FOUND.value())
+                .status(status.value())
                 .title("Resource not found")
                 .detail(ex.getMessage())
                 .developerMessage(ex.getClass().getName())
