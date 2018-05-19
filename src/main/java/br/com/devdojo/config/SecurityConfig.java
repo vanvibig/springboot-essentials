@@ -19,7 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("/*/protected/**").hasRole("USER")
+                .antMatchers("/*/admin/**").hasRole("ADMIN")
                 .and().httpBasic()
                 .and().csrf().disable();
     }
@@ -30,15 +31,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-//        auth.inMemoryAuthentication()
-//                .withUser("william")
-//                .password("devdojo")
-//                .roles("USER")
-//                .and()
-//                .withUser("admin")
-//                .password("devdojo")
-//                .roles("USER", "ADMIN");
-//    }
 }
